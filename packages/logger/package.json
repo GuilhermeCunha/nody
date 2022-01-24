@@ -15,7 +15,10 @@
         "test:unit": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/unit",
         "test:integration": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/integration",
         "build:package": "tsc",
-        "clean": "rimraf node_modules dist"
+        "clean": "rimraf node_modules dist",
+        "minor": "yarn version --minor",
+        "preversion": "yarn test",
+        "postversion": "git push --tags && yarn publish . --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\""
     },
     "dependencies": {
         "winston": "^3.4.0"
