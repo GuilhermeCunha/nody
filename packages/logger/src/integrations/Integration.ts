@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { ILogMethods } from '..';
-import { KeyValue } from '../types';
+import { KeyValue, ILogMethods } from '../types';
 
 export abstract class Integration implements ILogMethods {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
