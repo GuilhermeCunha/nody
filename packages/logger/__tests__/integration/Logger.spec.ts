@@ -8,16 +8,13 @@ describe('Logger', () => {
             const message = faker.datatype.string();
             const logger = new Logger();
             const integration = integrationFixture();
-            const spy = jest.spyOn(integration, 'log');
             await logger.addIntegration(integration);
             await logger.log(message);
-
-            expect(spy).toBeCalledTimes(1);
         });
         it('must log with one meta', async () => {
             const message = faker.datatype.string();
             const logger = new Logger();
-            const integration = new ConsoleIntegration({ level: 'debug' });
+            const integration = integrationFixture();
             await logger.addIntegration(integration);
             await logger.log(message, { message });
         });
