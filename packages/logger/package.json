@@ -1,6 +1,6 @@
 {
     "name": "@nody-org/logger",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "license": "MIT",
     "private": false,
     "main": "./dist/index.js",
@@ -19,8 +19,9 @@
         "minor": "yarn version --minor",
         "major": "yarn version --major",
         "patch": "yarn version --patch",
+        "latest": "yarn version --patch",
         "preversion": "yarn test",
-        "postversion": "git push --tags && yarn build:package && yarn publish . --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\""
+        "postversion": "git push --tags && yarn build:package && yarn publish . --tag $npm_package_version && yarn publish . --tag latest && git push && echo \"Successfully released version $npm_package_version!\""
     },
     "dependencies": {
         "winston": "^3.4.0"
