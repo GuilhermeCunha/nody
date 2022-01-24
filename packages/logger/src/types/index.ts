@@ -4,10 +4,10 @@ export type KeyValue = { [key: string]: any };
 export type ValueOf<T> = T[keyof T];
 
 export interface ILogMethods {
-    log(message: string, ...meta: KeyValue[]): Promise<void>;
-    error(message: string, ...meta: KeyValue[]): Promise<void>;
-    debug(message: string, ...meta: KeyValue[]): Promise<void>;
-    warn(message: string, ...meta: KeyValue[]): Promise<void>;
+    log(message: string, meta?: KeyValue): Promise<void>;
+    error(message: string, meta?: KeyValue): Promise<void>;
+    debug(message: string, meta?: KeyValue): Promise<void>;
+    warn(message: string, meta?: KeyValue): Promise<void>;
 }
 
 export type IntegrationConfig = {

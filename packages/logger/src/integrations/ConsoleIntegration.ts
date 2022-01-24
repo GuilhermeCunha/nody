@@ -12,10 +12,11 @@ export class ConsoleIntegration extends Integration {
     constructor(configs: ConsoleIntegrationConfigs) {
         super();
         this.configs = configs;
+        this.setup();
     }
 
-    async setup(): Promise<void> {
-        winston = await import('winston');
+    setup(): void {
+        winston = require('winston');
 
         this.logger = winston.createLogger({
             level: this.configs.level,
@@ -28,16 +29,16 @@ export class ConsoleIntegration extends Integration {
         );
     }
 
-    async log(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.info(message, ...meta);
+    async log(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.info(message, meta);
     }
-    async error(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.error(message, ...meta);
+    async error(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.error(message, meta);
     }
-    async debug(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.debug(message, ...meta);
+    async debug(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.debug(message, meta);
     }
-    async warn(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.warn(message, ...meta);
+    async warn(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.warn(message, meta);
     }
 }

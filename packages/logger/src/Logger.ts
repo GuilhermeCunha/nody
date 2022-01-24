@@ -12,30 +12,36 @@ export class Logger implements ILogMethods {
     getContext(): KeyValue {
         return this.context;
     }
-    async addIntegration(integration: Integration): Promise<void> {
+    addIntegration(integration: Integration): void {
         if (!(integration instanceof Integration)) {
             throw new InvalidIntegrationError(`${typeof integration} is not a valid Integration object`);
         }
-        await integration.setup();
         this.integrations.push(integration);
     }
     getIntegrations(): Integration[] {
         return this.integrations;
     }
-    async log(message: string, ...meta: KeyValue[]): Promise<void> {
-        const context = this.getContext();
-        await Promise.all(this.integrations.map((integration) => integration.log(message, ...meta, context)));
+
+    getMetaWithContext(meta: KeyValue = {}): KeyValue {
+        return {
+            ...this.context,
+            ...meta,
+        };
     }
-    async error(message: string, ...meta: KeyValue[]): Promise<void> {
-        const context = this.getContext();
-        await Promise.all(this.integrations.map((integration) => integration.error(message, ...meta, context)));
+    async log(message: string, meta?: KeyValue): Promise<void> {
+        const metaWithContext = this.getMetaWithContext(meta);
+        await Promise.all(this.integrations.map((integration) => integration.log(message, metaWithContext)));
     }
-    async debug(message: string, ...meta: KeyValue[]): Promise<void> {
-        const context = this.getContext();
-        await Promise.all(this.integrations.map((integration) => integration.debug(message, ...meta, context)));
+    async error(message: string, meta?: KeyValue): Promise<void> {
+        const metaWithContext = this.getMetaWithContext(meta);
+        await Promise.all(this.integrations.map((integration) => integration.error(message, metaWithContext)));
     }
-    async warn(message: string, ...meta: KeyValue[]): Promise<void> {
-        const context = this.getContext();
-        await Promise.all(this.integrations.map((integration) => integration.warn(message, ...meta, context)));
+    async debug(message: string, meta?: KeyValue): Promise<void> {
+        const metaWithContext = this.getMetaWithContext(meta);
+        await Promise.all(this.integrations.map((integration) => integration.debug(message, metaWithContext)));
+    }
+    async warn(message: string, meta?: KeyValue): Promise<void> {
+        const metaWithContext = this.getMetaWithContext(meta);
+        await Promise.all(this.integrations.map((integration) => integration.warn(message, metaWithContext)));
     }
 }

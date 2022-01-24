@@ -12,21 +12,14 @@ describe('Logger', () => {
         it('must add integration', async () => {
             const logger = new Logger();
             const integration = integrationFixture();
-            await logger.addIntegration(integration);
+            logger.addIntegration(integration);
             expect(logger.getIntegrations().length).toBe(1);
-        });
-        it('must call integration setup', async () => {
-            const logger = new Logger();
-            const integration = integrationFixture();
-            const spy = jest.spyOn(integration, 'setup');
-            await logger.addIntegration(integration);
-            expect(spy).toBeCalledTimes(1);
         });
         it('must add integration if already have one', async () => {
             const logger = new Logger();
             const integration = integrationFixture();
-            await logger.addIntegration(integration);
-            await logger.addIntegration(integration);
+            logger.addIntegration(integration);
+            logger.addIntegration(integration);
 
             expect(logger.getIntegrations().length).toBe(2);
         });
@@ -34,7 +27,7 @@ describe('Logger', () => {
         it('must throw exception if invalid Integration was provided', async () => {
             const logger = new Logger();
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            expect(logger.addIntegration({} as any)).rejects.toThrowError(InvalidIntegrationError);
+            expect(() => logger.addIntegration({} as any)).toThrow(InvalidIntegrationError);
         });
     });
     describe('setContext', () => {
@@ -48,7 +41,7 @@ describe('Logger', () => {
 
             const logger = new Logger();
             const integration = integrationFixture();
-            await logger.addIntegration(integration);
+            logger.addIntegration(integration);
             logger.setContext(context);
             expect(logger.getContext()).toBe(context);
         });
@@ -62,15 +55,18 @@ describe('Logger', () => {
                 a: randomString,
                 b: randomNumber,
             };
+            const meta = {
+                c: randomNumber,
+            };
 
             const logger = new Logger();
             const integration = integrationFixture();
-            await logger.addIntegration(integration);
-            const spy = jest.spyOn(logger, 'getContext');
+            logger.addIntegration(integration);
+            const spy = jest.spyOn(logger, 'getMetaWithContext');
             logger.setContext(context);
 
-            await logger.log(randomString);
-            expect(spy).toBeCalledTimes(1);
+            await logger.log(randomString, meta);
+            expect(spy).toBeCalledWith(meta);
         });
     });
 });

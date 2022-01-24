@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import type Winston from 'winston';
+
 import { IntegrationConfig, KeyValue } from '../types';
 import { Integration } from './Integration';
 
@@ -20,13 +22,14 @@ export class CloudWatchIntegration extends Integration {
     constructor(configs: CloudWatchIntegrationConfigs) {
         super();
         this.configs = configs;
+
+        this.setup();
     }
 
-    async setup(): Promise<void> {
-        winston = await import('winston');
-
-        const WinstonCloudwatch = await (await import('winston-cloudwatch')).default;
-        const AWS = await import('aws-sdk');
+    setup(): void {
+        winston = require('winston');
+        const WinstonCloudwatch = require('winston-cloudwatch');
+        const AWS = require('aws-sdk');
 
         this.logger = winston.createLogger({
             level: this.configs.level,
@@ -46,16 +49,16 @@ export class CloudWatchIntegration extends Integration {
         );
     }
 
-    async log(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.info(message, ...meta);
+    async log(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.info(message, meta);
     }
-    async error(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.error(message, ...meta);
+    async error(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.error(message, meta);
     }
-    async debug(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.debug(message, ...meta);
+    async debug(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.debug(message, meta);
     }
-    async warn(message: string, ...meta: KeyValue[]): Promise<void> {
-        this.logger.warn(message, ...meta);
+    async warn(message: string, meta?: KeyValue): Promise<void> {
+        this.logger.warn(message, meta);
     }
 }
