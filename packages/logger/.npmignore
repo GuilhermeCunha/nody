@@ -1,0 +1,5 @@
+__tests__
+.turbo
+coverage
+*.log
+src

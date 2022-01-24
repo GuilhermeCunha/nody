@@ -1,5 +1,5 @@
 {
-    "extends": "@nody/tsconfig/package.tsconfig.json",
+    "extends": "@nody-org/tsconfig/package.tsconfig.json",
     "compilerOptions": {
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

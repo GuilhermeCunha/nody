@@ -1,12 +1,12 @@
 {
-    "name": "@nody/logger",
+    "name": "@nody-org/logger",
     "version": "0.0.1",
     "license": "MIT",
     "private": false,
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "jest": {
-        "preset": "@nody/jest/node"
+        "preset": "@nody-org/jest/node"
     },
     "scripts": {
         "lint": "eslint src/",
