@@ -1,0 +1,13 @@
+{
+    "name": "@nody/jest",
+    "version": "0.0.0",
+    "license": "MIT",
+    "main": "index.js",
+    "private": true,
+    "files": [
+        "node"
+    ],
+    "scripts": {
+        "clean": "rimraf dist"
+    }
+}

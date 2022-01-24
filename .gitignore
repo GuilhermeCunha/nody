@@ -1,0 +1,14 @@
+node_modules
+.env*
+!.env*.example
+
+
+# Serverless directories
+.serverless
+.build
+coverage
+.DS_Store
+dist
+*.log
+tsconfig.tsbuildinfo
+.turbo

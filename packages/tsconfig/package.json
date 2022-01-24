@@ -1,0 +1,10 @@
+{
+    "name": "@nody/tsconfig",
+    "version": "0.0.1",
+    "private": true,
+    "main": "index.js",
+    "files": [
+        "base.tsconfig.json",
+        "package.tsconfig.json"
+    ]
+}

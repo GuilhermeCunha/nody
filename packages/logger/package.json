@@ -1,0 +1,32 @@
+{
+    "name": "@nody/logger",
+    "version": "0.0.1",
+    "license": "MIT",
+    "private": false,
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "jest": {
+        "preset": "@nody/jest/node"
+    },
+    "scripts": {
+        "lint": "eslint src/",
+        "lint:fix": "eslint --fix src/",
+        "test": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage",
+        "test:unit": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/unit",
+        "test:integration": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/integration",
+        "build:package": "tsc",
+        "clean": "rimraf node_modules dist"
+    },
+    "dependencies": {
+        "winston": "^3.4.0"
+    },
+    "devDependencies": {
+        "@types/winston": "^2.4.4",
+        "aws-sdk": "^2.1062.0",
+        "winston-cloudwatch": "^3.1.1"
+    },
+    "optionalDependencies": {
+        "aws-sdk": "^2.1062.0",
+        "winston-cloudwatch": "^3.1.1"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "extends": "./base.tsconfig.json",
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "importHelpers": true,
+        "composite": true,
+        "target": "esnext",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "lib": ["esnext"],
+        "module": "CommonJS",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
+    }
+}

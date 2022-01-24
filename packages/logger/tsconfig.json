@@ -1,0 +1,10 @@
+{
+    "extends": "@nody/tsconfig/package.tsconfig.json",
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "rootDir": "src/",
+        "outDir": "dist"
+    },
+    "include": ["src"]
+}
