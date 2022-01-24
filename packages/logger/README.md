@@ -13,7 +13,26 @@ yarn add @nody-org/logger
 npm install @nody-org/logger
 ```
 
-- [NPM Page](https://docs.npmjs.com/creating-and-publishing-an-organization-scoped-package)
-- [YARN Page](https://classic.yarnpkg.com/en/package/@nody-org/logger)
+
+## How to use
+
+```typescript
+import { Logger, ConsoleIntegration } from '@nody-org/logger'
+
+// add your chosen integrations
+logger.addIntegration(new ConsoleIntegration({
+    level: 'debug',
+}));
+
+// this context is always added to the logs meta
+logger.setContext({
+    appName: '{{appName}}',
+    sessionId: '{{sessionId}}'
+});
+
+logger.debug('==> your message', {
+    anyKey: 'any-value',
+});
+```
 
 Feel free to collaborate!
