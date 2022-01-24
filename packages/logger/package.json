@@ -19,7 +19,6 @@
         "minor": "yarn version --minor",
         "major": "yarn version --major",
         "patch": "yarn version --patch",
-        "latest": "yarn version --patch",
         "publish:version": "yarn publish . --tag $npm_package_version --non-interactive",
         "publish:latest": "yarn publish . --tag latest --non-interactive",
         "preversion": "yarn test",
