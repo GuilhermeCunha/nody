@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { ConsoleIntegration, Logger } from '../../src';
+import { Logger } from '../../src';
 import { integrationFixture } from '../fixtures/Integration';
 
 describe('Logger', () => {
