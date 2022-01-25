@@ -17,13 +17,11 @@ export type CloudWatchIntegrationConfigs = IntegrationConfig & {
 let winston: typeof Winston;
 
 export class CloudWatchIntegration extends Integration {
-    configs: CloudWatchIntegrationConfigs;
+    declare configs: CloudWatchIntegrationConfigs;
     logger!: Winston.Logger;
-    constructor(configs: CloudWatchIntegrationConfigs) {
-        super();
-        this.configs = configs;
 
-        this.setup();
+    constructor(configs: CloudWatchIntegrationConfigs) {
+        super(configs);
     }
 
     setup(): void {

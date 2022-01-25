@@ -7,12 +7,11 @@ export type ConsoleIntegrationConfigs = IntegrationConfig;
 let winston: typeof Winston;
 
 export class ConsoleIntegration extends Integration {
-    configs: ConsoleIntegrationConfigs;
+    declare configs: ConsoleIntegrationConfigs;
     logger!: Winston.Logger;
+
     constructor(configs: ConsoleIntegrationConfigs) {
-        super();
-        this.configs = configs;
-        this.setup();
+        super(configs);
     }
 
     setup(): void {

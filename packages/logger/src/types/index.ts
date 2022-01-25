@@ -12,6 +12,10 @@ export interface ILogMethods {
 
 export type IntegrationConfig = {
     level: LogLevel;
+    /**
+     * @description If true, setup will be performed automatically. The default value is true.
+     */
+    setup?: boolean;
 };
 
 export const LOG_LEVELS = {
