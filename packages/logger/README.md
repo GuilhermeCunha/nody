@@ -19,6 +19,8 @@ npm install @nody-org/logger
 ```typescript
 import { Logger, ConsoleIntegration } from '@nody-org/logger'
 
+const logger = new Logger()
+
 // add your chosen integrations
 logger.addIntegration(new ConsoleIntegration({
     level: 'debug',
