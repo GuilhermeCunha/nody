@@ -1,0 +1,27 @@
+{
+    "name": "@nody-org/{{packageName}}",
+    "version": "0.2.0",
+    "license": "MIT",
+    "private": false,
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "jest": {
+        "preset": "@nody-org/jest/node"
+    },
+    "scripts": {
+        "lint": "eslint src/",
+        "lint:fix": "eslint --fix src/",
+        "test": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage",
+        "test:unit": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/unit",
+        "test:integration": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/integration",
+        "build:package": "tsc",
+        "clean": "rimraf node_modules dist",
+        "minor": "yarn version --minor",
+        "major": "yarn version --major",
+        "patch": "yarn version --patch",
+        "publish:version": "yarn publish . --tag $npm_package_version --non-interactive",
+        "publish:latest": "yarn publish . --tag latest --non-interactive",
+        "preversion": "yarn test",
+        "postversion": "git push --tags && yarn build:package && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
+    }
+}
