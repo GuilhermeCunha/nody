@@ -1,0 +1,8 @@
+{
+    "extends": "@nody-org/tsconfig/package.tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "src/",
+        "outDir": "dist"
+    },
+    "include": ["src"]
+}
