@@ -1,5 +1,5 @@
 {
-    "name": "@nody-org/aws-lambda-monitoring",
+    "name": "@nody-org/metrics",
     "version": "0.2.0",
     "license": "MIT",
     "private": false,

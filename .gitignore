@@ -12,3 +12,5 @@ dist
 *.log
 tsconfig.tsbuildinfo
 .turbo
+
+**/temp

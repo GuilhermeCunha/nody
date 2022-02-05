@@ -1,31 +1,25 @@
-export const example = {};
+export * from './metrics';
+import { Metric } from './metrics/Metric';
 
-export type RegisterMetrics = {
+export type WithMetrics = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handler: Promise<any>;
-    beforeEnd: Promise<void>;
+    metrics: Metric[];
 };
 
-const bytesToMB = (value: number) => Math.round((value / 1024 / 1024) * 100) / 100;
+export const withMetrics = ({ handler, metrics }: WithMetrics) => {
+    const finish = () => Promise.all(metrics.map((metric) => metric.onFinish()));
+    const destroy = () => Promise.all(metrics.map((metric) => metric.destroy()));
 
-export const getMemoryMetrics = () => {
-    const memoryData = process.memoryUsage();
-    return {
-        rss: bytesToMB(memoryData.rss), // Resident Set Size - total memory allocated for the process execution
-        total: bytesToMB(memoryData.heapTotal), // total size of the allocated heap
-        used: bytesToMB(memoryData.heapUsed), // actual memory used during the execution
-    };
-};
-
-export const withMetrics = ({ handler }: RegisterMetrics) => {
-    return new Promise((resolve, reject) => {
-        return handler
-            .then((data) => {
-                // TODO register metrics
+    return new Promise(async (resolve, reject) => {
+        await Promise.all(metrics.map((metric) => metric.setup()));
+        handler
+            .then(async (data) => {
+                await finish();
                 resolve(data);
             })
-            .catch((err) => {
-                // TODO register metrics
+            .catch(async (err) => {
+                await destroy();
                 reject(err);
             });
     });

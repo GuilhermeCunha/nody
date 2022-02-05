@@ -1,1 +1,1 @@
-aws-lambda-monitoring
+metrics
