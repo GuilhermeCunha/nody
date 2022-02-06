@@ -1,6 +1,6 @@
 {
     "name": "@nody-org/metrics",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "license": "MIT",
     "private": false,
     "main": "./dist/index.js",
@@ -23,5 +23,8 @@
         "publish:latest": "yarn publish . --tag latest --non-interactive",
         "preversion": "yarn test",
         "postversion": "git push --tags && yarn build:package && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
+    },
+    "devDependencies": {
+        "serverless-offline": "^8.4.0"
     }
 }
