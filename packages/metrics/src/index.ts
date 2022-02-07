@@ -1,4 +1,6 @@
 export * from './metrics';
+export * from './registers';
+
 import { Metric } from './metrics/Metric';
 
 export type WithMetrics = {

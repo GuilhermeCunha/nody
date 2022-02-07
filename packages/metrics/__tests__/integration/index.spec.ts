@@ -1,6 +1,6 @@
-import { withMetrics, RamMetrics } from '../../src';
+import { withMetrics, RamMetrics, RamMetricsOutput } from '../../src';
 import * as path from 'path';
-import { JSONRegister } from '../../src/registers/JSONRegister';
+import { JSONRegister, JSONRegisterMetric } from '../../src/registers/JSONRegister';
 
 const tempFolderPath = path.resolve(__dirname, '..', 'temp');
 const easyHandler = async () => {
@@ -12,20 +12,35 @@ const hardHandler = async () => {
     return randomNumbers;
 };
 describe('withMetrics', () => {
-    it('easyHandler', async () => {
-        const metric = new RamMetrics({
-            registers: [
-                new JSONRegister({
-                    outputFilePath: path.join(tempFolderPath, 'ram-metric-easy.txt'),
-                }),
-            ],
+    describe('easyHandler', () => {
+        const register = new JSONRegister({
+            outputFilePath: path.join(tempFolderPath, 'ram-metric-easy.txt'),
         });
 
-        await withMetrics({
-            handler: easyHandler(),
-            metrics: [metric],
+        it('must register metrics', async () => {
+            const metric = new RamMetrics({
+                registers: [register],
+            });
+
+            await withMetrics({
+                handler: easyHandler(),
+                metrics: [metric],
+            });
         });
-    }, 10000);
+        it('must read metrics', async () => {
+            let total = 0;
+            let nMetrics = 0;
+            await register.readMetrics((metric: JSONRegisterMetric<RamMetricsOutput>) => {
+                total += metric.data.maxUsed;
+                nMetrics += 1;
+            });
+
+            console.log({
+                mean: total / nMetrics,
+                nMetrics,
+            });
+        }, 10000);
+    });
 
     it('hardHandler', async () => {
         const ramMetric = new RamMetrics({
