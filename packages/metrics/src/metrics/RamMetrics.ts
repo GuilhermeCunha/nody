@@ -13,12 +13,59 @@ export class RamMetrics extends Metric {
         rss: 0,
         total: 0,
     };
+    startTime = 0;
     async onFinish(): Promise<void> {
-        // console.log('[RamMetrics] ==>  output', this.output);
+        const now = Date.now();
+        const executionTimeInMs = now - this.startTime;
         this.emit('metric-output', this.output);
 
         await this.destroy();
-        await Promise.all(this.registers.map((register) => register.register(this.name, this.output)));
+        await Promise.all(
+            this.registers.map(async (register) => {
+                return Promise.all([
+                    register.register(
+                        {
+                            name: `${this.name}-maxUsed`,
+                            unit: 'Count',
+                            value: this.output.maxUsed,
+                        },
+                        {
+                            identifiers: this.identifiers,
+                        },
+                    ),
+                    register.register(
+                        {
+                            name: `${this.name}-rss`,
+                            unit: 'Count',
+                            value: this.output.rss,
+                        },
+                        {
+                            identifiers: this.identifiers,
+                        },
+                    ),
+                    register.register(
+                        {
+                            name: `${this.name}-total`,
+                            unit: 'Count',
+                            value: this.output.total,
+                        },
+                        {
+                            identifiers: this.identifiers,
+                        },
+                    ),
+                    register.register(
+                        {
+                            name: `${this.name}-execution-time`,
+                            unit: 'Microseconds',
+                            value: executionTimeInMs,
+                        },
+                        {
+                            identifiers: this.identifiers,
+                        },
+                    ),
+                ]);
+            }),
+        );
     }
     async destroy(): Promise<void> {
         clearInterval(this.interval);
@@ -47,6 +94,7 @@ export class RamMetrics extends Metric {
     }
 
     async setup(): Promise<void> {
+        this.startTime = Date.now();
         this.calculateMetric();
         this.interval = setInterval(this.calculateMetric.bind(this), 100);
     }

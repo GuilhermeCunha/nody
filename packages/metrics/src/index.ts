@@ -5,7 +5,7 @@ import { Metric } from './metrics/Metric';
 
 export type WithMetrics = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    handler: Promise<any>;
+    handler: () => Promise<any>;
     metrics: Metric[];
 };
 
@@ -15,7 +15,7 @@ export const withMetrics = ({ handler, metrics }: WithMetrics) => {
 
     return new Promise(async (resolve, reject) => {
         await Promise.all(metrics.map((metric) => metric.setup()));
-        handler
+        handler()
             .then(async (data) => {
                 await finish();
                 resolve(data);

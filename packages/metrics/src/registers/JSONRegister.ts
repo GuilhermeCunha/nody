@@ -1,22 +1,33 @@
 import * as fs from 'fs';
+import get from 'lodash/get';
 import readline from 'readline';
-import { MetricRegister, OnReadMetric } from './MetricRegister';
+import { MetricRegisterConstructor } from '.';
+import {
+    MetricData,
+    MetricRegister,
+    OnReadMetric,
+    RegisterMetadata,
+    RegisterMetadataIdentifier,
+} from './MetricRegister';
 
-export type JSONRegisterConstructor = {
+export type JSONRegisterConstructor = MetricRegisterConstructor & {
     outputFilePath: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type JSONRegisterMetric<Data = any> = {
+export type JSONRegisterMetric = {
+    namespace: string;
     timestamp: number;
-    type: string;
-    data: Data;
+    name: string;
+    unit: string;
+    value: number;
+    identifiers: RegisterMetadataIdentifier[];
 };
 
 export class JSONRegister extends MetricRegister {
     outputFilePath: string;
     constructor(params: JSONRegisterConstructor) {
-        super();
+        super(params);
         this.outputFilePath = params.outputFilePath;
     }
 
@@ -25,11 +36,15 @@ export class JSONRegister extends MetricRegister {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async register(metricName: string, data: any) {
+    async register({ name, value, unit }: MetricData, metadata?: RegisterMetadata) {
+        const identifiers: RegisterMetadataIdentifier[] = get(metadata, 'identifiers', []);
         const line: JSONRegisterMetric = {
             timestamp: Date.now(),
-            type: metricName,
-            data,
+            name,
+            unit,
+            value,
+            identifiers,
+            namespace: this.namespace,
         };
         fs.appendFileSync(this.outputFilePath, `${JSON.stringify(line)}\r\n`);
     }

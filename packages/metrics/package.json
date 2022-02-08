@@ -25,6 +25,16 @@
         "postversion": "git push --tags && yarn build:package && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
     },
     "devDependencies": {
+        "@types/aws-sdk": "^2.7.0",
+        "@types/lodash": "^4.14.178",
+        "aws-sdk": "^2.1070.0",
+        "dotenv": "^16.0.0",
         "serverless-offline": "^8.4.0"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21"
+    },
+    "optionalDependencies": {
+        "aws-sdk": "^2.1070.0"
     }
 }
