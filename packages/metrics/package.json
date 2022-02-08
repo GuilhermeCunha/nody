@@ -1,6 +1,6 @@
 {
     "name": "@nody-org/metrics",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "license": "MIT",
     "private": false,
     "main": "./dist/index.js",
@@ -19,8 +19,8 @@
         "minor": "yarn version --minor",
         "major": "yarn version --major",
         "patch": "yarn version --patch",
-        "publish:version": "yarn publish dist --tag $npm_package_version --non-interactive",
-        "publish:latest": "yarn publish dist --tag latest --non-interactive",
+        "publish:version": "yarn publish . --tag $npm_package_version --non-interactive",
+        "publish:latest": "yarn publish . --tag latest --non-interactive",
         "preversion": "yarn test",
         "postversion": "git push --tags && yarn build:package && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
     },
