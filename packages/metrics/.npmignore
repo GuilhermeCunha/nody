@@ -1,0 +1,6 @@
+src
+coverage
+__test__
+tsconfig.tsbuildinfo
+*.log
+*.env*
