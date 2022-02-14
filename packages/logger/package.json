@@ -1,6 +1,6 @@
 {
     "name": "@nody-org/logger",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "license": "MIT",
     "private": false,
     "main": "./dist/index.js",
