@@ -23,9 +23,11 @@ export class Logger implements ILogMethods {
     }
 
     getMetaWithContext(meta: KeyValue = {}): KeyValue {
+        const preparedMeta =
+            meta instanceof Error ? JSON.parse(JSON.stringify(meta, Object.getOwnPropertyNames(meta))) : meta;
         return {
             ...this.context,
-            ...meta,
+            ...preparedMeta,
         };
     }
     async log(message: string, meta?: KeyValue): Promise<void> {
