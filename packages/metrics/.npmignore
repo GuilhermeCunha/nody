@@ -1,6 +1,6 @@
 src
 coverage
-__test__
+__tests__
 tsconfig.tsbuildinfo
 *.log
 *.env*
