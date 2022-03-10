@@ -1,5 +1,6 @@
 import faker from 'faker';
-import { Integration, ConsoleIntegration } from '../../../src';
+import { ConsoleIntegration } from '../../../src/integrations/ConsoleIntegration';
+import { Integration } from '../../../src/integrations/Integration';
 import { winstonFixture } from '../../fixtures/Winston';
 
 describe('ConsoleIntegration', () => {

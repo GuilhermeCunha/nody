@@ -1,4 +1,5 @@
-import { CloudWatchIntegration, Logger } from '../../src';
+import { Logger } from '../../src';
+import { CloudWatchIntegration } from '../../src/integrations/CloudWatchIntegration';
 import { describeIf } from '../utils';
 
 describeIf(!!(process.env.TEST_AWS_ACCESS_KEY_ID && process.env.TEST_AWS_SECRET_ACCESS_KEY))(

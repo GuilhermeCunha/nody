@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { ImportError } from '..';
+import { ImportError } from '../errors';
 
 export const requireOrThrow = (name: string) => {
     try {

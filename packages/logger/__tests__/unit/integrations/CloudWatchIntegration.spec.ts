@@ -1,5 +1,6 @@
 import faker from 'faker';
-import { Integration, CloudWatchIntegration } from '../../../src';
+import { CloudWatchIntegration } from '../../../src/integrations/CloudWatchIntegration';
+import { Integration } from '../../../src/integrations/Integration';
 import { winstonFixture } from '../../fixtures/Winston';
 
 describe('CloudWatchIntegration', () => {

@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import type Winston from 'winston';
-import { ImportError } from '../errors';
 
 import { IntegrationConfig, KeyValue } from '../types';
-import { optionalRequire } from '../utils';
 import { Integration } from './Integration';
 
-const winston = optionalRequire<typeof Winston>('winston');
-const WinstonCloudwatch = optionalRequire<any>('winston-cloudwatch');
-const AWS = optionalRequire<any>('aws-sdk');
+import winston from 'winston';
+import WinstonCloudwatch from 'winston-cloudwatch';
+import AWS from 'aws-sdk';
 
 export type CloudWatchIntegrationConfigs = IntegrationConfig & {
     streamName: string;
@@ -41,20 +39,7 @@ export class CloudWatchIntegration extends Integration {
         super(configs);
     }
 
-    private validateDependencies() {
-        if (!winston) {
-            throw new ImportError('winston');
-        }
-        if (!WinstonCloudwatch) {
-            throw new ImportError('winston-cloudwatch');
-        }
-        if (!AWS) {
-            throw new ImportError('aws-sdk');
-        }
-    }
-
     setup(): void {
-        this.validateDependencies();
         this.logger = winston.createLogger({
             level: this.configs.level,
         });

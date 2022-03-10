@@ -1,4 +1,5 @@
-import { ConsoleIntegration, Integration } from '../../src';
+import { ConsoleIntegration } from '../../src/integrations/ConsoleIntegration';
+import { Integration } from '../../src/integrations/Integration';
 
 export const integrationFixture = (): Integration => {
     const integration = new ConsoleIntegration({ level: 'debug' });
