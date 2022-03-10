@@ -18,7 +18,7 @@ export const optionalRequire = <Type>(name: string): Type => {
 
         return dependency as Type;
     } catch (err) {
-        console.error(`Error during import of package '${name}'`);
+        console.debug(`Error during import of package '${name}'`, err);
         return null as unknown as Type;
     }
 };
