@@ -7,6 +7,7 @@ export const requireOrThrow = (name: string) => {
 
         return dependency;
     } catch (err) {
-        throw new ImportError(`Package ${name} is not installed`);
+        console.error(err);
+        throw new ImportError(`Error during import of package '${name}'`);
     }
 };
