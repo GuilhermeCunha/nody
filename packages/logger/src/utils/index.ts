@@ -11,3 +11,14 @@ export const requireOrThrow = (name: string) => {
         throw new ImportError(`Error during import of package '${name}'`);
     }
 };
+
+export const optionalRequire = <Type>(name: string): Type => {
+    try {
+        const dependency = require(name);
+
+        return dependency as Type;
+    } catch (err) {
+        console.error(`Error during import of package '${name}'`);
+        return null as unknown as Type;
+    }
+};
