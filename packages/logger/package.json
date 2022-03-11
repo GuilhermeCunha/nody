@@ -40,7 +40,7 @@
         "publish:version": "yarn publish . --tag $npm_package_version --non-interactive",
         "publish:latest": "yarn publish . --tag latest --non-interactive",
         "preversion": "yarn test",
-        "postversion": "git push --tags && yarn build:package && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
+        "postversion": "git push --tags && yarn build && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
     },
     "dependencies": {
         "winston": "^3.4.0"
