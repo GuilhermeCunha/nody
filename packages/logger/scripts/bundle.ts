@@ -1,10 +1,14 @@
 import { buildSync } from 'esbuild';
 import { sync as globSync } from 'glob';
 
+/**
+ * Build scripts based in Faker repository
+ */
+
 console.log('Building dist for node (cjs)...');
 
 // Generate entry-points for cjs compatibility
-const cjsOutputPath = './dist/cjs';
+const cjsOutputPath = './dist';
 
 buildSync({
     entryPoints: globSync('./src/**/*.ts'),
