@@ -1,10 +1,10 @@
 {
     "name": "@nody-org/logger",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "license": "MIT",
     "private": false,
     "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "types": "./dist/types/index.d.ts",
     "jest": {
         "preset": "@nody-org/jest/node"
     },
@@ -16,7 +16,8 @@
     "typesVersions": {
         ">=4.0": {
             "*": [
-                "dist/types/*"
+                "dist/types/*",
+                "dist/types/index.d.ts"
             ]
         }
     },
