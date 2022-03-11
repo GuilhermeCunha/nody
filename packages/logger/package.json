@@ -1,6 +1,6 @@
 {
     "name": "@nody-org/logger",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "license": "MIT",
     "private": false,
     "main": "./dist/index.js",
@@ -10,8 +10,8 @@
     },
     "exports": {
         ".": {
-            "node": "./dist/cjs/index.js",
-            "default": "./dist/cjs/index.js"
+            "node": "./dist/index.js",
+            "default": "./dist/index.js"
         },
         "./package.json": "./package.json"
     },
@@ -32,14 +32,14 @@
         "build:clean": "rimraf dist",
         "build:code": "esno ./scripts/bundle.ts",
         "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
-        "build": "run-s build:clean build:code build:types",
+        "build": "run-s build:clean build:types build:code",
         "clean": "rimraf node_modules dist coverage .eslintcache",
         "minor": "yarn version --minor",
         "major": "yarn version --major",
         "patch": "yarn version --patch",
         "publish:version": "yarn publish . --tag $npm_package_version --non-interactive",
         "publish:latest": "yarn publish . --tag latest --non-interactive",
-        "preversion": "yarn test",
+        "preversion": "yarn test && yarn build",
         "postversion": "git push --tags && yarn build && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
     },
     "dependencies": {
