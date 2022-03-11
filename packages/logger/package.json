@@ -10,7 +10,7 @@
     },
     "exports": {
         ".": "./dist/index.js",
-        "./*": "./dist/*/*.js",
+        "./*": "./dist/*",
         "./package.json": "./package.json"
     },
     "typesVersions": {
