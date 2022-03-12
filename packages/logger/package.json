@@ -4,7 +4,7 @@
     "license": "MIT",
     "private": false,
     "main": "./index.js",
-    "types": "./types/index.d.ts",
+    "types": "./index.d.ts",
     "jest": {
         "preset": "@nody-org/jest/node"
     },
