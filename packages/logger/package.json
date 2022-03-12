@@ -14,11 +14,10 @@
         "test": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage",
         "test:unit": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/unit",
         "test:integration": "yarn cross-env NODE_ENV=test jest --passWithNoTests --collect-coverage __tests__/integration",
-        "build:package": "tsc",
+        "build:package": "esno ./scripts/package.ts",
         "build:clean": "rimraf dist tsconfig.tsbuildinfo",
         "build:code": "tsc",
-        "package": "esno ./scripts/package.ts",
-        "build": "run-s build:clean build:code package",
+        "build": "run-s build:clean build:code build:package",
         "clean": "rimraf node_modules dist coverage .eslintcache",
         "minor": "yarn version --minor",
         "major": "yarn version --major",
@@ -34,7 +33,6 @@
     "devDependencies": {
         "@types/winston": "^2.4.4",
         "aws-sdk": "^2.1062.0",
-        "esbuild": "^0.14.25",
         "esno": "^0.14.1",
         "npm-run-all": "^4.1.5",
         "winston-cloudwatch": "^3.1.1"
