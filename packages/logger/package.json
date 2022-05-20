@@ -1,6 +1,6 @@
 {
     "name": "@nody-org/logger",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "license": "MIT",
     "private": false,
     "main": "./index.js",
@@ -28,6 +28,7 @@
         "postversion": "git push --tags && yarn build && yarn publish:latest && git push && echo \"Successfully released version $npm_package_version!\""
     },
     "dependencies": {
+        "tslib": "^2.4.0",
         "winston": "^3.4.0"
     },
     "devDependencies": {
