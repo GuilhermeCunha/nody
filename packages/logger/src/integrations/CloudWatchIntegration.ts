@@ -7,7 +7,7 @@ import { Integration } from './Integration';
 
 import winston from 'winston';
 import WinstonCloudwatch from 'winston-cloudwatch';
-import AWS from 'aws-sdk';
+import { CloudWatchLogsClient } from '@aws-sdk/client-cloudwatch-logs';
 
 export type CloudWatchIntegrationConfigs = IntegrationConfig & {
     streamName: string;
@@ -43,16 +43,17 @@ export class CloudWatchIntegration extends Integration {
         this.logger = winston.createLogger({
             level: this.configs.level,
         });
-
         const winstonCloudWatch = new WinstonCloudwatch({
             name: this.configs.streamName,
             logGroupName: this.configs.groupName,
             logStreamName: this.configs.streamName,
-            cloudWatchLogs: new AWS.CloudWatchLogs({
+            cloudWatchLogs: new CloudWatchLogsClient({
                 region: this.configs.aws.region,
-                accessKeyId: this.configs.aws.accessKeyId,
-                secretAccessKey: this.configs.aws.secretAccessKey,
-            }),
+                credentials: {
+                    accessKeyId: this.configs.aws.accessKeyId,
+                    secretAccessKey: this.configs.aws.secretAccessKey,
+                },
+            }) as any,
             messageFormatter: logFormatter,
         });
         this.logger.add(winstonCloudWatch);
