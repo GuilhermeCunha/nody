@@ -7,7 +7,6 @@ import { Integration } from './Integration';
 
 import winston from 'winston';
 import WinstonCloudwatch from 'winston-cloudwatch';
-import AWS from 'aws-sdk';
 
 export type CloudWatchIntegrationConfigs = IntegrationConfig & {
     streamName: string;
@@ -47,13 +46,9 @@ export class CloudWatchIntegration extends Integration {
             name: this.configs.streamName,
             logGroupName: this.configs.groupName,
             logStreamName: this.configs.streamName,
-            cloudWatchLogs: new AWS.CloudWatchLogs({
-                region: this.configs.aws.region,
-                credentials: {
-                    accessKeyId: this.configs.aws.accessKeyId,
-                    secretAccessKey: this.configs.aws.secretAccessKey,
-                },
-            }),
+            awsAccessKeyId: this.configs.aws.accessKeyId,
+            awsSecretKey: this.configs.aws.secretAccessKey,
+            awsRegion: this.configs.aws.region,
             messageFormatter: logFormatter,
         });
         this.logger.add(winstonCloudWatch);
